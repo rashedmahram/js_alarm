@@ -1,0 +1,32 @@
+body{
+    background-color: rgb(213, 212, 245);
+    background-image: url('https://source.unsplash.com/random');
+    color: white;
+}
+.responsive {
+    width: 100%;
+    height: auto;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.center {
+    height: 100%;
+    width: 100%;
+    display:block;
+    text-align:center;
+    position: relative;
+    border: 3px solid rgba(0, 128, 0, 0.178);
+}
+
+.alarm {
+    margin-top: 30%;
+    font-size: 16rem;
+}
+.saat{
+    font-size: 2rem;
+    text-shadow: -1px 0 black,
+    0 1px black,
+    1px 0 black,
+    0 -1px black;
+}
