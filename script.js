@@ -1,39 +1,14 @@
-getPremissins();
+const countDownMints = document.getElementById("counter");
+const x = document.getElementById("myAudio");
+
 var startMints = parseInt(prompt("Add Alarm", ""));
 let time = startMints * 60;
-const countDownMints = document.getElementById("counter");
-// sound
-var x = document.getElementById("myAudio");
-function playAudio() {
-  x.play();
-}
-function pauseAudio() {
-  x.pause();
-}
-setInterval(updateTime, 1000);
-function updateTime() {
-  const minuts = Math.floor(time / 60);
-  let scond = time % 60;
-  scond = scond < 10 ? "0" + scond : scond;
-  countDownMints.innerHTML = `${minuts}:${scond}`;
-  Control();
-  return time--;
-}
+var isActive = false;
 
-function Control() {
-  if (time <= 1) {
-    time = 0;
-    countDownMints.innerHTML = `00:00`;
-    ShowNotiification();
-    playAudio();
-  }
-}
-
+// Oclock Reel Time
 setInterval(getTime, 1000);
-
 function getTime() {
   var today = new Date();
-
   var date =
     today.getFullYear() + "-" + (today.getMonth() + 1) + "-" + today.getDate();
   var time =
@@ -46,6 +21,40 @@ function getTime() {
 }
 
 
+function updateTime() {
+  const minuts = Math.floor(time / 60);
+  let scond = time % 60;
+  scond = scond < 10 ? "0" + scond : scond;
+  countDownMints.innerHTML = `${minuts}:${scond}`;
+  // alarm on:
+   isActive=true; 
+  // 1- set time text 00:00
+  restText();
+  // play sound
+  playAudio();
+  // send Notification
+  ShowNotiification();
+  // update the alarm
+  setTimeout(updateTime,1000);
+  return time--;
+}
+
+function restText(){
+  if (time <= 1) {
+    countDownMints.innerHTML = `00:00`;
+  }
+}
+
+// sound
+function playAudio() {
+  x.play();
+}
+function pauseAudio() {
+  x.pause();
+}
+
+
+getPremissins();
 // Notiifications
 function ShowNotiification() {
   const notification = new Notification("clear", {
